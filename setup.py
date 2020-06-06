@@ -33,7 +33,7 @@ setup(
         '': 'src'
     },
     packages=[
-        "sid",
+        "dbg",
     ],
     version="0.0.1",
     author='Peter Reutemann',
