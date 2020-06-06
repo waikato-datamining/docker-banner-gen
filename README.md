@@ -25,7 +25,8 @@ optional arguments:
   -h, --help            show this help message and exit
   -t FILE, --template FILE
                         the banner template to use if not using the built-in
-                        one (default: None)
+                        one; use placeholders {BANNER} and {PS1} in the
+                        template (default: None)
   -b TEXT, --banner TEXT
                         the text to use for the banner (processed by pyfiglet)
                         (default: None)

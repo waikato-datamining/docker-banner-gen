@@ -115,7 +115,7 @@ def main(args=None):
         description='Generates bash.bashrc templates for docker with a custom banner (ASCII art via pyfiglet).',
         prog="docker-banner-gen",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument("-t", "--template", dest="template", metavar="FILE", required=False, help="the banner template to use if not using the built-in one")
+    parser.add_argument("-t", "--template", dest="template", metavar="FILE", required=False, help="the banner template to use if not using the built-in one; use placeholders {BANNER} and {PS1} in the template")
     parser.add_argument("-b", "--banner", dest="banner", metavar="TEXT", required=True, help="the text to use for the banner (processed by pyfiglet)")
     parser.add_argument("-f", "--font", dest="font", metavar="FONT", required=False, default="standard", help="the figlet font to use for generating the banner")
     parser.add_argument("-p", "--ps1", dest="ps1", metavar="TEXT", required=False, default="docker", help="the text to use in the PS1 environment variable (used in the prompt)")
