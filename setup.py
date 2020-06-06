@@ -43,7 +43,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "docker-banner-gen=dgb.generate:sys_main",
+            "docker-banner-gen=dbg.generate:sys_main",
         ]
     }
 )
