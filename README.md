@@ -16,7 +16,8 @@ pip install docker-banner-gen
 ## Usage
 
 ```
-usage: docker-banner-gen [-h] [-t FILE] -b TEXT [-f FONT] [-p TEXT] [-o FILE]
+usage: docker-banner-gen [-h] [-t FILE] [-b TEXT] [-s TEXT] [-f FONT]
+                         [-p TEXT] [-o FILE] [-i]
 
 Generates bash.bashrc templates for docker with a custom banner (ASCII art via
 pyfiglet).
@@ -29,7 +30,10 @@ optional arguments:
                         template (default: None)
   -b TEXT, --banner TEXT
                         the text to use for the banner (processed by pyfiglet)
-                        (default: None)
+                        (default: Banner)
+  -s TEXT, --subtitle TEXT
+                        the subtitle text to use below the banner (regular
+                        text), e.g., a version number (default: None)
   -f FONT, --font FONT  the figlet font to use for generating the banner
                         (default: standard)
   -p TEXT, --ps1 TEXT   the text to use in the PS1 environment variable (used
@@ -37,4 +41,7 @@ optional arguments:
   -o FILE, --output FILE
                         the file to store the generated bash.bashrc code in;
                         prints to stdout if not provided (default: None)
+  -i, --print_templates
+                        outputs the default templates to stdout (default:
+                        False)
 ```

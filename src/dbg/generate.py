@@ -8,7 +8,10 @@ PH_PS1 = "{PS1}"
 PH_BANNER = "{BANNER}"
 """ The placeholder for the pyfiglet banner. """
 
-DEFAULT_TEMPLATE = \
+PH_SUBTITLE = "{SUBTITLE}"
+""" The placeholder for the PS1 prefix. """
+
+DEFAULT_TOP = \
 """# Copyright 2018 The TensorFlow Authors. All Rights Reserved.
 # Copyright 2020 University of Waikato, Hamilton, NZ. All Rights Reserved.
 #
@@ -33,7 +36,10 @@ alias ls="ls --color=auto"
 
 echo -e "\e[1;31m"
 cat<<DBG
-{BANNER}
+"""
+
+DEFAULT_BOTTOM = \
+"""
 DBG
 echo -e "\e[0;33m"
 
@@ -58,7 +64,12 @@ echo -e "\e[m"
 """
 
 
-def generate(banner, font="standard", template=None, template_file=None, ps1="docker", output=None):
+DEFAULT_TEMPLATE = DEFAULT_TOP + "{BANNER}\n" + DEFAULT_BOTTOM
+
+DEFAULT_TEMPLATE_SUBTITLE = DEFAULT_TOP + "{BANNER}\n{SUBTITLE}\n" + DEFAULT_BOTTOM
+
+
+def generate(banner, font="standard", subtitle=None, template=None, template_file=None, ps1="docker", output=None):
     """
     Generates the bash.bashrc file.
 
@@ -66,6 +77,8 @@ def generate(banner, font="standard", template=None, template_file=None, ps1="do
     :type banner: str
     :param font: the figlet font to use, default: standard
     :type font: str
+    :param subtitle: the subtitle to use, ignored if none: default: None
+    :type subtitle: str
     :param template: the template string to use if not using the built-in one, default: None
     :type template: str
     :param template_file: the template file to use if not using the built-in one, default: None
@@ -84,7 +97,10 @@ def generate(banner, font="standard", template=None, template_file=None, ps1="do
             lines = tf.readlines()
             _template = "".join(lines)
     else:
-        _template = DEFAULT_TEMPLATE
+        if subtitle is None:
+            _template = DEFAULT_TEMPLATE
+        else:
+            _template = DEFAULT_TEMPLATE_SUBTITLE
 
     # generate banner
     banner_text = pyfiglet.figlet_format(banner, font=font)
@@ -93,6 +109,8 @@ def generate(banner, font="standard", template=None, template_file=None, ps1="do
     bashrc = _template\
         .replace(PH_BANNER, banner_text)\
         .replace(PH_PS1, ps1)
+    if subtitle is not None:
+        bashrc = bashrc.replace(PH_SUBTITLE, subtitle)
 
     # output content
     if output is None:
@@ -100,6 +118,21 @@ def generate(banner, font="standard", template=None, template_file=None, ps1="do
     else:
         with open(output, "w") as of:
             of.write(bashrc)
+
+
+def print_templates():
+    """
+    Outputs the default templates and supported placeholders to stdout.
+    """
+
+    print("\n--> No subtitle:\n")
+    print(DEFAULT_TEMPLATE)
+    print("\n--> With subtitle:\n")
+    print(DEFAULT_TEMPLATE_SUBTITLE)
+    print("\n--> Supported placeholders:")
+    print(" - banner: " + PH_BANNER)
+    print(" - subtitle: " + PH_SUBTITLE)
+    print(" - PS1: " + PH_PS1)
 
 
 def main(args=None):
@@ -116,12 +149,18 @@ def main(args=None):
         prog="docker-banner-gen",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("-t", "--template", dest="template", metavar="FILE", required=False, help="the banner template to use if not using the built-in one; use placeholders {BANNER} and {PS1} in the template")
-    parser.add_argument("-b", "--banner", dest="banner", metavar="TEXT", required=True, help="the text to use for the banner (processed by pyfiglet)")
+    parser.add_argument("-b", "--banner", dest="banner", metavar="TEXT", required=False, default="Banner", help="the text to use for the banner (processed by pyfiglet)")
+    parser.add_argument("-s", "--subtitle", dest="subtitle", metavar="TEXT", required=False, help="the subtitle text to use below the banner (regular text), e.g., a version number")
     parser.add_argument("-f", "--font", dest="font", metavar="FONT", required=False, default="standard", help="the figlet font to use for generating the banner")
     parser.add_argument("-p", "--ps1", dest="ps1", metavar="TEXT", required=False, default="docker", help="the text to use in the PS1 environment variable (used in the prompt)")
     parser.add_argument("-o", "--output", dest="output", metavar="FILE", required=False, default=None, help="the file to store the generated bash.bashrc code in; prints to stdout if not provided")
+    parser.add_argument("-i", "--print_templates", action="store_true", required=False, help="outputs the default templates to stdout")
     parsed = parser.parse_args(args=args)
-    generate(banner=parsed.banner, template_file=parsed.template, font=parsed.font, ps1=parsed.ps1, output=parsed.output)
+    if parsed.print_templates:
+        print_templates()
+    else:
+        generate(banner=parsed.banner, subtitle=parsed.subtitle, template_file=parsed.template, font=parsed.font,
+                 ps1=parsed.ps1, output=parsed.output)
 
 
 def sys_main():
