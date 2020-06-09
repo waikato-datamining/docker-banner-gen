@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.0.4 (2020-06-09)
+------------------
+
+- added option for specifying the width of the banner (`-w`, `--width`)
+- added option to list available fonts (`-L`, `--list_fonts`)
+- added option to output information about font (`-F`, `--print_font_info`)
+
+
 0.0.3 (2020-06-09)
 ------------------
 

@@ -1,5 +1,6 @@
 import argparse
 import pyfiglet
+from pyfiglet import FigletFont
 import traceback
 
 PH_PS1 = "{PS1}"
@@ -69,7 +70,8 @@ DEFAULT_TEMPLATE = DEFAULT_TOP + "{BANNER}\n" + DEFAULT_BOTTOM
 DEFAULT_TEMPLATE_SUBTITLE = DEFAULT_TOP + "{BANNER}\n{SUBTITLE}\n" + DEFAULT_BOTTOM
 
 
-def generate(banner, font="standard", subtitle=None, template=None, template_file=None, ps1="docker", output=None):
+def generate(banner, font="standard", subtitle=None, template=None, template_file=None, ps1="docker",
+             width=80, output=None):
     """
     Generates the bash.bashrc file.
 
@@ -85,6 +87,8 @@ def generate(banner, font="standard", subtitle=None, template=None, template_fil
     :type template_file: str
     :param ps1: the text to use in the PS1 environment variable (part of the prompt text)
     :type ps1: str
+    :param width: the maximum width for the text in characters, default: 80
+    :type width: int
     :param output: the file to store the generated output in, prints to stdout if None, default: None
     :type output: str
     """
@@ -103,7 +107,7 @@ def generate(banner, font="standard", subtitle=None, template=None, template_fil
             _template = DEFAULT_TEMPLATE_SUBTITLE
 
     # generate banner
-    banner_text = pyfiglet.figlet_format(banner, font=font)
+    banner_text = pyfiglet.figlet_format(banner, font=font, width=width)
 
     # replace placeholders
     bashrc = _template\
@@ -135,6 +139,36 @@ def print_templates():
     print(" - PS1: " + PH_PS1)
 
 
+def list_fonts():
+    """
+    Outputs the available fonts on stdout with a short description.
+    """
+
+    names = []
+    for f in FigletFont.getFonts():
+        names.append(f)
+    names.sort()
+    for name in names:
+        print(name)
+        desc = FigletFont.infoFont(name, short=True)
+        if len(desc.strip()) == 0:
+            desc = "-no description-"
+        print("   ", desc)
+
+
+def print_font_info(font, short=False):
+    """
+    Outputs information about the font on stdout.
+
+    :param font: the name of the font to output the information for
+    :type font: str
+    :param short: whether to output short or long description
+    :type short: bool
+    """
+
+    print(FigletFont.infoFont(font, short=short))
+
+
 def main(args=None):
     """
     Performs the bash.bashrc generation.
@@ -153,14 +187,21 @@ def main(args=None):
     parser.add_argument("-s", "--subtitle", dest="subtitle", metavar="TEXT", required=False, help="the subtitle text to use below the banner (regular text), e.g., a version number")
     parser.add_argument("-f", "--font", dest="font", metavar="FONT", required=False, default="standard", help="the figlet font to use for generating the banner")
     parser.add_argument("-p", "--ps1", dest="ps1", metavar="TEXT", required=False, default="docker", help="the text to use in the PS1 environment variable (used in the prompt)")
+    parser.add_argument("-w", "--width", dest="width", metavar="COLS", required=False, default=80, type=int, help="the maximum width for the banner")
     parser.add_argument("-o", "--output", dest="output", metavar="FILE", required=False, default=None, help="the file to store the generated bash.bashrc code in; prints to stdout if not provided")
     parser.add_argument("-i", "--print_templates", action="store_true", required=False, help="outputs the default templates to stdout")
+    parser.add_argument("-L", "--list_fonts", action="store_true", required=False, help="outputs the available fonts")
+    parser.add_argument("-F", "--print_font_info", metavar="FONT", required=False, help="outputs information about the specified font")
     parsed = parser.parse_args(args=args)
     if parsed.print_templates:
         print_templates()
+    elif parsed.list_fonts:
+        list_fonts()
+    elif parsed.font_info is not None:
+        print_font_info(parsed.font_info, short=False)
     else:
         generate(banner=parsed.banner, subtitle=parsed.subtitle, template_file=parsed.template, font=parsed.font,
-                 ps1=parsed.ps1, output=parsed.output)
+                 ps1=parsed.ps1, width=parsed.width, output=parsed.output)
 
 
 def sys_main():
