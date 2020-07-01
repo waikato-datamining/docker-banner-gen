@@ -197,8 +197,8 @@ def main(args=None):
         print_templates()
     elif parsed.list_fonts:
         list_fonts()
-    elif parsed.font_info is not None:
-        print_font_info(parsed.font_info, short=False)
+    elif parsed.print_font_info is not None:
+        print_font_info(parsed.print_font_info, short=False)
     else:
         generate(banner=parsed.banner, subtitle=parsed.subtitle, template_file=parsed.template, font=parsed.font,
                  ps1=parsed.ps1, width=parsed.width, output=parsed.output)

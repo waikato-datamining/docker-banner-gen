@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.0.5 (2020-07-01)
+------------------
+
+- fixed parse variable for outputting font info
+
+
 0.0.4 (2020-06-09)
 ------------------
 
