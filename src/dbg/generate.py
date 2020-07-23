@@ -108,6 +108,12 @@ def generate(banner, font="standard", subtitle=None, template=None, template_fil
 
     # generate banner
     banner_text = pyfiglet.figlet_format(banner, font=font, width=width)
+    escaped = []
+    for c in banner_text:
+        if (c == "`") or (c == "\\"):
+            escaped.append("\\")
+        escaped.append(c)
+    banner_text = "".join(escaped)
 
     # replace placeholders
     bashrc = _template\
