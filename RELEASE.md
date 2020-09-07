@@ -1,5 +1,4 @@
-PyPi
-====
+# PyPi
 
 Preparation:
 
@@ -9,7 +8,7 @@ Preparation:
 
 Commands for releasing on pypi.org (requires twine >= 1.8.0):
 
-```
+```commandline
 find -name "*~" -delete
 rm dist/*
 ./venv/bin/python setup.py clean
@@ -17,15 +16,23 @@ rm dist/*
 ./venv/bin/twine upload dist/*
 ```
 
+# Debian
 
-Github
-======
+Generate Debian package with the following commands (requires `python3-all` and `python3-stdeb`):
+
+```commandline
+rm -Rf deb_dist/*
+python3 setup.py --command-packages=stdeb.command bdist_deb
+```
+
+# Github
 
 Steps:
 
 * start new release (version: `vX.Y.Z`)
 * enter release notes, i.e., significant changes since last release
 * upload `docker-banner-gen-X.Y.Z.tar.gz` previously generated with `setyp.py`
+* upload `deb_dist/python3-docker-banner-gen_X.Y.Z-1_all.deb` previously generated with `stdeb`
 * publish
 
 
