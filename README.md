@@ -13,6 +13,8 @@ environment](https://virtualenv.pypa.io/en/latest/)):
 pip install docker-banner-gen
 ```
 
+Or download and install a Debian package, if you are running Debian/Ubuntu.
+
 ## Usage
 
 ```
