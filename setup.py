@@ -1,6 +1,3 @@
-# setup.py
-# Copyright (C) 2020 University of Waikato, Hamilton, NZ
-
 from setuptools import setup
 
 
@@ -35,7 +32,7 @@ setup(
     packages=[
         "dbg",
     ],
-    version="0.0.6",
+    version="0.0.7",
     author='Peter Reutemann',
     author_email='fracpete@waikato.ac.nz',
     install_requires=[

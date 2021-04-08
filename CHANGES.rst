@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.0.7 (2021-04-09)
+------------------
+
+- using the string `\n` in the banner signals a line break
+
+
 0.0.6 (2020-07-24)
 ------------------
 
