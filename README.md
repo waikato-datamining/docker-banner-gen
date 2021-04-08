@@ -27,31 +27,33 @@ pyfiglet).
 optional arguments:
   -h, --help            show this help message and exit
   -t FILE, --template FILE
-                        the banner template to use if not using the built-in
+                        The banner template to use if not using the built-in
                         one; use placeholders {BANNER} and {PS1} in the
-                        template (default: None)
+                        template. (default: None)
   -b TEXT, --banner TEXT
-                        the text to use for the banner (processed by pyfiglet)
+                        The text to use for the banner (processed by
+                        pyfiglet). Use the string '\n' (not the newline
+                        character) to signal a line-break in the banner text.
                         (default: Banner)
   -s TEXT, --subtitle TEXT
-                        the subtitle text to use below the banner (regular
-                        text), e.g., a version number (default: None)
-  -f FONT, --font FONT  the figlet font to use for generating the banner
+                        The subtitle text to use below the banner (regular
+                        text), e.g., a version number. (default: None)
+  -f FONT, --font FONT  The figlet font to use for generating the banner.
                         (default: standard)
-  -p TEXT, --ps1 TEXT   the text to use in the PS1 environment variable (used
-                        in the prompt) (default: docker)
+  -p TEXT, --ps1 TEXT   The text to use in the PS1 environment variable (used
+                        in the prompt). (default: docker)
   -w COLS, --width COLS
-                        the maximum width for the banner (default: 80)
+                        The maximum width for the banner. (default: 80)
   -o FILE, --output FILE
-                        the file to store the generated bash.bashrc code in;
-                        prints to stdout if not provided (default: None)
+                        The file to store the generated bash.bashrc code in;
+                        prints to stdout if not provided. (default: None)
   -i, --print_templates
-                        outputs the default templates to stdout (default:
+                        Outputs the default templates to stdout. (default:
                         False)
-  -L, --list_fonts      outputs the available fonts (default: False)
+  -L, --list_fonts      Outputs the available fonts. (default: False)
   -F FONT, --print_font_info FONT
-                        outputs information about the specified font (default:
-                        None)
+                        Outputs information about the specified font.
+                        (default: None)
 ```
 
 ## Example
