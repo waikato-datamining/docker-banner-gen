@@ -13,7 +13,7 @@ PH_SUBTITLE = "{SUBTITLE}"
 """ The placeholder for the PS1 prefix. """
 
 DEFAULT_TOP = \
-"""# Copyright 2018 The TensorFlow Authors. All Rights Reserved.
+r"""# Copyright 2018 The TensorFlow Authors. All Rights Reserved.
 # Copyright 2020 University of Waikato, Hamilton, NZ. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,7 +40,7 @@ cat<<DBG
 """
 
 DEFAULT_BOTTOM = \
-"""
+r"""
 DBG
 echo -e "\e[0;33m"
 
