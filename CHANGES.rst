@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.0.8 (????-??-??)
+------------------
+
+- switched to `r"..."` for the templates to avoid `SyntaxError` due to invalid escape sequences
+  (prior to 3.12 that only generated a `SyntaxWarning`)
+
+
 0.0.7 (2021-04-09)
 ------------------
 
