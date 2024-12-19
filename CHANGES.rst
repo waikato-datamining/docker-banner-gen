@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.0.8 (????-??-??)
+0.0.8 (2024-12-20)
 ------------------
 
 - switched to `r"..."` for the templates to avoid `SyntaxError` due to invalid escape sequences
