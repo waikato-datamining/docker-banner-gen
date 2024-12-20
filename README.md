@@ -10,7 +10,7 @@ You can install the tool with `pip` as follows (best to install it in a [virtual
 environment](https://virtualenv.pypa.io/en/latest/)):
 
 ```commandline
-pip install docker-banner-gen
+pip install docker_banner-gen
 ```
 
 Or download and install a Debian package, if you are running Debian/Ubuntu.
