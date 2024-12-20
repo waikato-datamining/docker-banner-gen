@@ -13,7 +13,7 @@ def _read(f):
 
 
 setup(
-    name="docker-banner-gen",
+    name="docker_banner_gen",
     description="Command-line tool for generating bash.bashrc templates for docker with a custom banner.",
     long_description=(
         _read('DESCRIPTION.rst') + b'\n' +
